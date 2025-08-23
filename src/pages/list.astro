@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import tpl_bg from '../assets/tpl_bg.png';
+import topbar from '../assets/topbar.png';
+---
+
+<BaseLayout>
+	<div 
+		class="absolute bg-cover bg-center w-full h-screen -z-10" 
+		style={`background-image: url(${tpl_bg.src});`}
+	></div>
+
+	<div class="absolute bg-purple-dark w-full flex justify-center">
+		<img 
+			src={topbar.src} 
+			alt="Top bar" 
+		/>
+	</div>
+
+    <div class="absolute pt-[2rem] md:pt-[10rem]">
+        <a href='input' class="absolute top-[1.5rem] md:top-[6rem] left-[1.5rem] md:left-[4rem] inline-flex items-center text-white hover:text-stone-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 16l-4-4m0 0l4-4m-4 4h99"/>
+            </svg>
+            <span class="ml-1 font-bold">Back</span>
+        </a>
+    </div>
+
+    <div class="min-h-screen flex flex-col items-center justify-start bg-purple-dark p-10 pt-32 md:pt-48">
+        <h1 class="text-4xl font-bold text-yellow-400 mb-6">Organization Member list</h1>
+        
+        <div class="overflow-x-auto w-full max-w-5xl">
+            <table id="studentsTable" class="w-full border-collapse border border-yellow-500 text-white">
+                <thead class="bg-yellow-600">
+                <tr>
+                    <th class="border border-yellow-500 px-4 py-2">First Name</th>
+                    <th class="border border-yellow-500 px-4 py-2">Last Name</th>
+                    <th class="border border-yellow-500 px-4 py-2">Course/Year/Section</th>
+                    <th class="border border-yellow-500 px-4 py-2">House</th>
+                </tr>
+                </thead>
+                <tbody class="text-center" id="studentsBody">
+                    <!-- Rows -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="flex justify-center mt-6">
+            <button 
+                id="download-csv" 
+                class="px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 
+                    text-white font-bold rounded-xl shadow-md 
+                    cursor-pointer transition-transform transform 
+                    hover:scale-105 hover:from-yellow-500 hover:to-yellow-700 
+                    active:scale-95"
+            >
+                Download CSV
+            </button>
+        </div>
+    </div>
+
+	<script src="/src/scripts/table.js"></script>
+</BaseLayout>

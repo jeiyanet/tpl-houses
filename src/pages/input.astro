@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import tpl_bg from '../assets/tpl_bg.png';
+import hat from '../assets/hat.png';
+import sorting_font from '../assets/sorting_font.png';
+import topbar from '../assets/topbar.png';
+---
+<BaseLayout>
+	<div 
+		class="absolute bg-cover bg-center w-full h-screen -z-10" 
+		style={`background-image: url(${tpl_bg.src});`}
+	></div>
+
+	<div class="absolute bg-purple-dark w-full flex justify-center">
+		<img 
+			src={topbar.src} 
+			alt="Top bar" 
+		/>
+	</div>
+
+	<div class="absolute pt-[2rem] md:pt-[10rem]">
+		<a href="list" 
+		class="absolute top-[1.5rem] md:top-[6rem] left-[1.5rem] md:left-[4rem] 
+				inline-flex items-center text-white hover:text-stone-400 z-50">
+			<span class="mr-1 font-medium text-base">List</span>
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+				stroke="currentColor" class="h-6 w-6">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16m0 0l-6-6m6 6l-6 6"/>
+			</svg>
+		</a>
+	</div>
+
+	<div class="relative flex justify-center items-center h-screen">
+		<img 
+			src={hat.src} 
+			alt="Hat" 
+		/>
+		<form class="flex items-center justify-center w-140 h-90 bg-purple-dark ml-4">
+			<div class="flex flex-col items-center justify-between space-y-5">
+				<img 
+					src={sorting_font.src} 
+					alt="sorting" 
+				/>
+				<!-- First Name Input -->
+				<div class="flex justify-between space-x-5">
+					<input 
+						type="text" 
+						placeholder="First Name" 
+						class="w-56 p-3 bg-white border-2 border-yellow-500 rounded-2xl text-black placeholder-gray-500"
+					/>
+				<!-- Last Name Input -->
+					<input 
+						type="text" 
+						placeholder="LastName" 
+						class="w-56 p-3 bg-white border-2 border-yellow-500 rounded-2xl text-black placeholder-gray-500"
+					/>
+				</div>
+
+				<!-- Course/Year/Section Input -->
+				<input 
+					type="text" 
+					placeholder="Course/Year/Section" 
+					class="w-110 p-3 bg-white border-2 border-yellow-500 rounded-2xl text-black placeholder-gray-500"
+				/>
+
+				<!-- Submit Button -->
+				<button 
+					id="button"
+					type="submit"
+					class="w-116 p-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-bold rounded-xl shadow-md 
+						cursor-pointer transition-transform transform hover:scale-105 hover:from-yellow-500 hover:to-yellow-700 
+						active:scale-95"
+				>
+					SUBMIT
+				</button>
+			</div>
+		</form>
+	</div>
+	<script src="/src/scripts/input.js"></script>
+</BaseLayout>
