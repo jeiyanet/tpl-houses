@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             students.push(student);
             localStorage.setItem("students", JSON.stringify(students));
 
-            loadVideo("/houses_roll.mp4", true, student);
+            loadVideo("/tpl-houses/houses_roll.mp4", true, student);
 
             firstNameInput.value = "";
             lastNameInput.value = "";
@@ -89,16 +89,16 @@ function getHouse(student) {
 
     switch (randomHouse) {
         case "cypertech":
-            loadVideo("/houses_reveal_cypertech.mp4");
+            loadVideo("/tpl-houses/houses_reveal_cypertech.mp4");
             break;
         case "datacrest":
-            loadVideo("/houses_reveal_datacrest.mp4");
+            loadVideo("/tpl-houses/houses_reveal_datacrest.mp4");
             break;
         case "ironclad":
-            loadVideo("/houses_reveal_ironclad.mp4");
+            loadVideo("/tpl-houses/houses_reveal_ironclad.mp4");
             break;
         case "nexispark":
-            loadVideo("/houses_reveal_nexispark.mp4");
+            loadVideo("/tpl-houses/houses_reveal_nexispark.mp4");
             break;
     }
     return randomHouse;

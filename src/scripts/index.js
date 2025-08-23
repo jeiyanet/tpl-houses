@@ -58,4 +58,4 @@ function getCookie(name) {
     return null;
 }
 
-loadVideo("/house_intro.mp4", "/input")
+loadVideo("/tpl-houses/house_intro.mp4", "/input")
