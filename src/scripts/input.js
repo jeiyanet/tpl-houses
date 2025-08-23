@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             students.push(student);
             localStorage.setItem("students", JSON.stringify(students));
 
-            loadVideo("/tpl-houses/houses_roll.mp4", true, student);
+            loadVideo("/tpl-houses/houses_roll.mp4", true, student, true);
 
             firstNameInput.value = "";
             lastNameInput.value = "";
@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-function loadVideo(videoUrl, shouldCallGetHouse = false, student = null) {
+function loadVideo(videoUrl, shouldCallGetHouse = false, student = null, allowSkip = false) {
     const container = document.createElement("div");
     Object.assign(container.style,  {
         position: "fixed",
@@ -59,15 +58,35 @@ function loadVideo(videoUrl, shouldCallGetHouse = false, student = null) {
         objectFit: "cover"
     });
 
+    container.appendChild(video);
+    document.body.appendChild(container);
+
+    function handleSpacebar(e) {
+        if (allowSkip && e.code === "Space") {
+            e.preventDefault();
+            video.pause();
+            container.remove();
+            if (shouldCallGetHouse) {
+                getHouse(student);
+            }
+            document.removeEventListener("keydown", handleSpacebar);
+        }
+    }
+
+    if (allowSkip) {
+        document.addEventListener("keydown", handleSpacebar);
+    }
+
     video.addEventListener("ended", function () {
         container.remove();
         if (shouldCallGetHouse) {
-            let house = getHouse(student);
+            getHouse(student);
         }
+        if (allowSkip) {
+            document.removeEventListener("keydown", handleSpacebar);
+        }
+        window.location.href = '/tpl-houses/list';
     });
-
-    container.appendChild(video);
-    document.body.appendChild(container);
 }
 
 function getHouse(student) {
