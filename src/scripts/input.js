@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const firstNameInput = document.querySelector('input[placeholder="First Name"]');
-    const lastNameInput = document.querySelector('input[placeholder="LastName"]');
+    const lastNameInput = document.querySelector('input[placeholder="Last Name"]');
     const courseInput = document.querySelector('input[placeholder="Course/Year/Section"]');
     const submitBtn = document.getElementById("button");
 
