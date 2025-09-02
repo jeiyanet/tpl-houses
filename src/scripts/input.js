@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function loadVideo(videoUrl, shouldCallGetHouse = false, student = null, allowSkip = false, redirectAfter = false) {
     const container = document.createElement("div");
-
     Object.assign(container.style,  {
         position: "fixed",
         top: 0,
@@ -109,20 +108,13 @@ function getHouse(student) {
         }
     }
 
-    switch (randomHouse) {
-        case "cypertech":
-            loadVideo("/tpl-houses/houses_reveal_cypertech.mp4", false, null, false, true);
-            break;
-        case "datacrest":
-            loadVideo("/tpl-houses/houses_reveal_datacrest.mp4", false, null, false, true);
-            break;
-        case "ironclad":
-            loadVideo("/tpl-houses/houses_reveal_ironclad.mp4", false, null, false, true);
-            break;
-        case "nexispark":
-            loadVideo("/tpl-houses/houses_reveal_nexispark.mp4", false, null, false, true);
-            break;
-    }
+    const houseVideos = {
+        cypertech: "/tpl-houses/houses_reveal_cypertech.mp4",
+        datacrest: "/tpl-houses/houses_reveal_datacrest.mp4",
+        ironclad: "/tpl-houses/houses_reveal_ironclad.mp4",
+        nexispark: "/tpl-houses/houses_reveal_nexispark.mp4"
+    };
 
+    loadVideo(houseVideos[randomHouse], false, null, false, true);
     return randomHouse;
 }
