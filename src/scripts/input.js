@@ -66,10 +66,10 @@ function loadVideo(videoUrl, shouldCallGetHouse = false, student = null, allowSk
             e.preventDefault();
             video.pause();
             container.remove();
-            if (shouldCallGetHouse) {
-                getHouse(student);
-            }
             document.removeEventListener("keydown", handleSpacebar);
+            if (shouldCallGetHouse) {
+                getHouse(student, true);
+            }
         }
     }
 
@@ -79,19 +79,18 @@ function loadVideo(videoUrl, shouldCallGetHouse = false, student = null, allowSk
 
     video.addEventListener("ended", function () {
         container.remove();
-        if (shouldCallGetHouse) {
-            getHouse(student);
-        }
         if (allowSkip) {
             document.removeEventListener("keydown", handleSpacebar);
         }
-        if (redirectAfter) {
+        if (shouldCallGetHouse) {
+            getHouse(student, true);
+        } else if (redirectAfter) {
             window.location.href = '/tpl-houses/list';
         }
     });
 }
 
-function getHouse(student) {
+function getHouse(student, redirect = false) {
     const houses = ["cypertech", "datacrest", "ironclad", "nexispark"];
     const randomHouse = houses[Math.floor(Math.random() * houses.length)];
 
@@ -115,6 +114,6 @@ function getHouse(student) {
         nexispark: "/tpl-houses/houses_reveal_nexispark.mp4"
     };
 
-    loadVideo(houseVideos[randomHouse], false, null, false, true);
+    loadVideo(houseVideos[randomHouse], false, null, false, redirect);
     return randomHouse;
 }
