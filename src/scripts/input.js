@@ -6,17 +6,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     submitBtn.addEventListener("click", (e) => {
         e.preventDefault();
- 
+
         const firstName = firstNameInput.value.trim();
         const lastName = lastNameInput.value.trim();
         const courseSection = courseInput.value.trim();
 
         if (firstName && lastName && courseSection) {
             const students = JSON.parse(localStorage.getItem("students")) || [];
+
             const student = { firstName, lastName, courseSection, house: null };
             students.push(student);
             localStorage.setItem("students", JSON.stringify(students));
+
             loadVideo("/tpl-houses/houses_roll.mp4", true, student, true);
+
             firstNameInput.value = "";
             lastNameInput.value = "";
             courseInput.value = "";
@@ -26,10 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function loadVideo(videoUrl, shouldCallGetHouse = false, student = null, allowSkip = false) {
+function loadVideo(videoUrl, shouldCallGetHouse = false, student = null, allowSkip = false, redirectAfter = false) {
     const container = document.createElement("div");
 
-    Object.assign(container.style, {
+    Object.assign(container.style,  {
         position: "fixed",
         top: 0,
         left: 0,
@@ -77,12 +80,14 @@ function loadVideo(videoUrl, shouldCallGetHouse = false, student = null, allowSk
 
     video.addEventListener("ended", function () {
         container.remove();
-
         if (shouldCallGetHouse) {
             getHouse(student);
         }
         if (allowSkip) {
             document.removeEventListener("keydown", handleSpacebar);
+        }
+        if (redirectAfter) {
+            window.location.href = '/tpl-houses/list';
         }
     });
 }
@@ -93,13 +98,11 @@ function getHouse(student) {
 
     if (student) {
         let students = JSON.parse(localStorage.getItem("students")) || [];
-
-        const index = students.findIndex(s =>
-            s.firstName === student.firstName &&
+        const index = students.findIndex(s => 
+            s.firstName === student.firstName && 
             s.lastName === student.lastName &&
             s.courseSection === student.courseSection
         );
-
         if (index !== -1) {
             students[index].house = randomHouse;
             localStorage.setItem("students", JSON.stringify(students));
@@ -108,16 +111,16 @@ function getHouse(student) {
 
     switch (randomHouse) {
         case "cypertech":
-            loadVideo("/tpl-houses/houses_reveal_cypertech.mp4");
+            loadVideo("/tpl-houses/houses_reveal_cypertech.mp4", false, null, false, true);
             break;
         case "datacrest":
-            loadVideo("/tpl-houses/houses_reveal_datacrest.mp4");
+            loadVideo("/tpl-houses/houses_reveal_datacrest.mp4", false, null, false, true);
             break;
         case "ironclad":
-            loadVideo("/tpl-houses/houses_reveal_ironclad.mp4");
+            loadVideo("/tpl-houses/houses_reveal_ironclad.mp4", false, null, false, true);
             break;
         case "nexispark":
-            loadVideo("/tpl-houses/houses_reveal_nexispark.mp4");
+            loadVideo("/tpl-houses/houses_reveal_nexispark.mp4", false, null, false, true);
             break;
     }
 
