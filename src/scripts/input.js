@@ -73,8 +73,6 @@ function loadVideo(videoUrl, shouldCallGetHouse = false, student = null, allowSk
         }
     }
 
-    // ciCTF{view_source_gets_you_the_flag}
-
     if (allowSkip) {
         document.addEventListener("keydown", handleSpacebar);
     }
